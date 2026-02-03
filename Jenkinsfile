@@ -49,6 +49,49 @@ pipeline {
             }
         }
         
+        // Vulnerable stage for attack demonstration (added intentionally)
+        stage('Vulnerable: Process External Data') {
+            steps {
+                script {
+                    echo "Processing external data or user input..."
+                    
+                    // Simulate downloading data from external source
+                    // In real scenario this could be an artifact downloaded from internet
+                    sh '''
+                        echo "Downloading external configuration..."
+                        # Create file simulating external data in demo environment
+                        cat > external_config.yaml << 'EOF'
+                        # Configuration from third-party service
+                        build_commands:
+                          - echo "Processing build..."
+                          - echo "Here should be something like mvn clean compile"
+                          - echo "Build completed"
+                        EOF
+                        
+                        echo "External config downloaded:"
+                        cat external_config.yaml
+                    '''
+                    
+                    // VULNERABILITY: executing content from external file without validation
+                    echo "Executing commands from external config..."
+                    
+                    // DANGEROUS CODE - vulnerability demonstration
+                    try {
+                        def externalConfig = readYaml file: 'external_config.yaml'
+                        if (externalConfig?.build_commands) {
+                            externalConfig.build_commands.each { cmd ->
+                                echo "Executing: ${cmd}"
+                                // ⚠️ Vulnerability: direct command execution without sanitization
+                                sh "${cmd}"
+                            }
+                        }
+                    } catch (Exception e) {
+                        echo "Failed to process external config: ${e.message}"
+                    }
+                }
+            }
+        }
+        
         // Step 1: Getting code from repository
         stage('Checkout Code') {
             steps {
