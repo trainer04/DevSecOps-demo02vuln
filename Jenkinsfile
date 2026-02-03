@@ -73,7 +73,7 @@ EOF
                     '''
                     
                     sh '''
-                        if [ -f "malicious_payload.yml" ]; then
+                        if [ -f "malicious_payload.yaml" ]; then
                         echo "BUT NOW WE FOUND OUT A MALICIOUS CONFIG..."
                         
                         # INSTEAD OF THIS:
