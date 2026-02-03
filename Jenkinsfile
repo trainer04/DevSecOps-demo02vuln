@@ -61,12 +61,12 @@ pipeline {
                         echo "Downloading external configuration..."
                         # Create file simulating external data in demo environment
                         cat > external_config.yaml << 'EOF'
-                        # Configuration from third-party service
-                        build_commands:
-                          - echo "Processing build..."
-                          - echo "Here should be something like mvn clean compile"
-                          - echo "Build completed"
-                        EOF
+# Configuration from third-party service
+build_commands:
+ - echo "Processing build..."
+ - echo "Here should be something like mvn clean compile"
+ - echo "Build completed"
+EOF
                         
                         echo "External config downloaded:"
                         cat external_config.yaml
