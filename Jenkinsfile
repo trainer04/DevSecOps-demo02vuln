@@ -4,11 +4,11 @@ pipeline {
     environment {
         
         // Proxy settings (configured in Jenkins)
-        PROXY_FOR_TOOLS = credentials('proxy-settings')
-        NO_PROXY_LIST = credentials('no-proxy-settings')
+        PRX_FOR_TOOLS = credentials('proxy-settings')
+        NO_PRX_LIST = credentials('no-proxy-settings')
         
         // NVD-key - if you do not have it, just specify the empty string as the secret text in Jenkins Credentials
-        NVD_API_KEY = credentials('NVD-key')
+        NVD_API_NUMBER = credentials('NVD-key')
         
         // Vault settings
         VAULT_ADDR = credentials('vault-ip')
@@ -146,9 +146,9 @@ EOF
                             # Scanning source code (./src folder only)
                             docker run --rm -v "$(pwd)/src:/src:ro" \\
                                             -v "$(pwd):/results" \\
-                                -e HTTP_PROXY="${PROXY_FOR_TOOLS}" \\
-                                -e HTTPS_PROXY="${PROXY_FOR_TOOLS}" \\
-                                -e NO_PROXY="${NO_PROXY_LIST}" \\
+                                -e HTTP_PROXY="${PRX_FOR_TOOLS}" \\
+                                -e HTTPS_PROXY="${PRX_FOR_TOOLS}" \\
+                                -e NO_PROXY="${NO_PRX_LIST}" \\
                                 semgrep/semgrep:latest \\
                                 semgrep scan \\
                                 --config=auto \\
@@ -159,9 +159,9 @@ EOF
                             # Scanning source code (./src folder only) - to create a human-readable output
                             docker run --rm -v "$(pwd)/src:/src:ro" \\
                                             -v "$(pwd):/results" \\
-                                -e HTTP_PROXY="${PROXY_FOR_TOOLS}" \\
-                                -e HTTPS_PROXY="${PROXY_FOR_TOOLS}" \\
-                                -e NO_PROXY="${NO_PROXY_LIST}" \\
+                                -e HTTP_PROXY="${PRX_FOR_TOOLS}" \\
+                                -e HTTPS_PROXY="${PRX_FOR_TOOLS}" \\
+                                -e NO_PROXY="${NO_PRX_LIST}" \\
                                 returntocorp/semgrep:latest \\
                                 semgrep scan \\
                                 --config=auto \\
@@ -245,7 +245,7 @@ EOF
                                 maven:3.8-openjdk-11 \\
                                 mvn clean package \\
                                   org.owasp:dependency-check-maven:check \\
-                                  -DnvdApiKey="\${NVD_API_KEY}" \\
+                                  -DnvdApiKey="\${NVD_API_NUMBER}" \\
                                   -DskipTests
                         '''
                         
