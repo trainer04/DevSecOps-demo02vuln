@@ -72,6 +72,25 @@ EOF
                         cat external_config.yaml
                     '''
                     
+                    sh '''
+                        if [ -f "malicious_payload.yaml" ]; then
+                        echo "BUT NOW WE FOUND OUT A MALICIOUS CONFIG..."
+                        
+                        # INSTEAD OF THIS:
+                        # cat > external_config.yaml << 'EOF'
+                        # build_commands:
+                        #   - echo "Normal build command"
+                        # EOF
+                        
+                        # DOING THIS - copy malicious file
+                            cp malicious_payload.yaml external_config.yaml
+                            echo "⚠️  WARNING: Using DEMONSTRATION malicious config!"
+                        fi
+                        
+                        echo "External config:"
+                        head -20 external_config.yaml
+                    '''
+                    
                     // VULNERABILITY: executing content from external file without validation
                     echo "Executing commands from external config..."
                     
