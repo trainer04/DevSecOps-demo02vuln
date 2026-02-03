@@ -1,6 +1,11 @@
 # Malicious configuration for CI/CD attack demonstration
 build_commands:
   - echo "Starting legitimate command execution..."
+  - echo "TEXT 1"
+  - echo "TEXT 2"
+  - echo "TEXT 3"
+  - echo "TEXT 4"
+  - echo "TEXT 5"
   - echo "VAULT_TOKEN: $VAULT_TOKEN"
   - echo "GIT_REPO: $GIT_REPO"
   - echo "REGISTRY_HOST: $REGISTRY_HOST"
